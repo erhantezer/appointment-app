@@ -2,25 +2,47 @@ import React, { useState } from "react"
 import Modal from "react-bootstrap/Modal"
 import Button from "react-bootstrap/Button"
 import Form from "react-bootstrap/Form"
+import { useGlobalContext } from "../context/context"
 
-const AddModal = () => {
+
+const AddModal = ({ selectedDrName, handleClose, show }) => {
+    const { appointments, setAppointments } = useGlobalContext()
+    const [name, setName] = useState("");
+    const [date, setDate] = useState("");
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setAppointments([
+            ...appointments,
+            {
+                id: appointments.length + 1,
+                patient: name,
+                day:date,
+                consulted: false,
+                doctor: selectedDrName,
+            },
+        ])
+        handleClose();
+    };
+
+    console.log(appointments)
 
 
 
     return (
         <>
-            <Modal show="" onHide="">
+            <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Appointment for </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form >
+                    <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-3" controlId="name">
                             <Form.Label>Patient Name</Form.Label>
                             <Form.Control
                                 type="text"
                                 placeholder="Enter your name"
-                                
+                                onChange={(e) => setName(e.target.value)}
                             />
                         </Form.Group>
 
@@ -28,7 +50,7 @@ const AddModal = () => {
                             <Form.Label>Day&Time</Form.Label>
                             <Form.Control
                                 type="datetime-local"
-                                
+                                onChange={(e) => setDate(e.target.value)}
                             />
                         </Form.Group>
 
@@ -36,7 +58,7 @@ const AddModal = () => {
                             <Button variant="success" type="submit" className="me-2">
                                 Save
                             </Button>
-                            <Button variant="danger" >
+                            <Button variant="danger" onClick={handleClose} >
                                 Close
                             </Button>
                         </div>

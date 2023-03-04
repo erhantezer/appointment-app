@@ -3,15 +3,19 @@ import { Col, Container, Row } from 'react-bootstrap';
 import { useGlobalContext } from '../context/context';
 import AddModal from './AddModal';
 import useSelectDrName from '../hooks/useSelectDrName';
+import {useState} from "react"
 
 const Doctors = () => {
+    const [show, setShow] = useState(false);
     const {doctors} = useGlobalContext();
     const {selectedDrName, setSelectedDrName} = useSelectDrName()
 
 
     const handleClick = (drName) => {
-        setSelectedDrName(drName)
+        setSelectedDrName(drName);
+        setShow(true)
     }
+
 
     return (
         <Container>
@@ -33,7 +37,7 @@ const Doctors = () => {
                         )
                 })}
             </Row>
-            <AddModal/>
+            <AddModal show={show} selectedDrName={selectedDrName} handleClose={() => setShow(false)}/>
         </Container>
     )
 }
