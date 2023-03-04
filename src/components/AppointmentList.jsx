@@ -10,8 +10,11 @@ const AppointmentList = () => {
             <h3 className='display-6 mb-2' style={{ color: "rgb(166,18,189)" }}>
                 Appointment List
             </h3>
-            <div>
-                
+            <div className='d-flex flex-column align-items-center'>
+                {!appointments.length && (<img src="./img/appointment.jpg" width="80%" alt="" />)} 
+                {appointments?.map((item) =>{
+                    
+                })}
             </div>
         </Container>
     )
