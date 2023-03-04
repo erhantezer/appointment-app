@@ -25,8 +25,11 @@ export const AppProvider = ({ children }) => {
   //   getAppointments()
   // }, [])
 
+    console.log(doctors)
+    console.log(appointments)
+
     return (
-        <AppContext.Provider value={{}}>
+        <AppContext.Provider value={{ doctors, setDoctors, appointments, setAppointments }}>
             {children}
         </AppContext.Provider>
     )
