@@ -5,23 +5,30 @@ import { Container } from 'react-bootstrap';
 const AppointmentList = () => {
     const { appointments, setAppointments } = useGlobalContext();
 
+
+
+    const handleDoubleClick = (id) => {
+        setAppointments()
+    }
+
     return (
         <Container className='p-2'>
             <h3 className='display-6 mb-2' style={{ color: "rgb(166,18,189)" }}>
                 Appointment List
             </h3>
             <div className='d-flex flex-column align-items-center'>
-                {!appointments.length && (<img src="./img/appointment.jpg" width="80%" alt="" />)} 
-                {appointments?.map((item) =>{
+                {!appointments.length && (<img src="./img/appointment.jpg" width="80%" alt="" />)}
+                {appointments?.map((item) => {
                     const { id, patient, consulted, doctor, day } = item;
                     return (
-                            <div
+                        <div
                             key={id}
                             className={consulted ? "appointments consulted" : "appointments "}
-                            >
+                            onDoubleClick={() => handleDoubleClick(id)}
+                        >
 
-                            </div>
-                        )
+                        </div>
+                    )
                 })}
             </div>
         </Container>
