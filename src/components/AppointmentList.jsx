@@ -11,7 +11,7 @@ const handleDelete = (id) => {
 }
 
     const handleDoubleClick = (id) => {
-        setAppointments()
+        setAppointments(appointments.map((item) => item.id === id ? {...item, consulted: !item.consulted} : item))
     }
 
     return (
@@ -35,8 +35,8 @@ const handleDelete = (id) => {
                                     <h5>{doctor}</h5>
                                 </Col>
                                 <Col xs={12} sm={12} md={6}>
-                                    <h5>Date: {day.toLocaleDateString()}</h5>
-                                    <h6>Time: {day.toLocaleTimeString()}</h6>
+                                    <h5>Date: {new Date(day).toLocaleDateString()}</h5>
+                                    <h6>Time: {new Date(day).toLocaleTimeString()}</h6>
                                 </Col>
                                 <Col xs={2} sm={4} md={1} className="text-end">
                                     <FaTimesCircle

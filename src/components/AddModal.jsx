@@ -7,7 +7,7 @@ import { useGlobalContext } from "../context/context"
 
 const AddModal = ({ selectedDrName, handleClose, show }) => {
     const { appointments, setAppointments } = useGlobalContext()
-    const [name, setName] = useState("");
+    const [patientName, setPatientName] = useState("");
     const [date, setDate] = useState("");
 
     const handleSubmit = (e) => {
@@ -16,8 +16,8 @@ const AddModal = ({ selectedDrName, handleClose, show }) => {
             ...appointments,
             {
                 id: appointments.length + 1,
-                patient: name,
-                day:date,
+                patient: patientName,
+                day: date,
                 consulted: false,
                 doctor: selectedDrName,
             },
@@ -33,7 +33,7 @@ const AddModal = ({ selectedDrName, handleClose, show }) => {
         <>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Appointment for </Modal.Title>
+                    <Modal.Title>Appointment for {selectedDrName} </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={handleSubmit}>
@@ -42,7 +42,7 @@ const AddModal = ({ selectedDrName, handleClose, show }) => {
                             <Form.Control
                                 type="text"
                                 placeholder="Enter your name"
-                                onChange={(e) => setName(e.target.value)}
+                                onChange={(e) => setPatientName(e.target.value)}
                             />
                         </Form.Group>
 
