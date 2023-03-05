@@ -1,11 +1,14 @@
 import React from 'react'
 import { useGlobalContext } from '../context/context'
-import { Container } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
+import { FaTimesCircle } from "react-icons/fa";
 
 const AppointmentList = () => {
     const { appointments, setAppointments } = useGlobalContext();
 
-
+const handleDelete = (id) => {
+    setAppointments(appointments.filter((item) => item.id !== id))
+}
 
     const handleDoubleClick = (id) => {
         setAppointments()
@@ -26,7 +29,23 @@ const AppointmentList = () => {
                             className={consulted ? "appointments consulted" : "appointments "}
                             onDoubleClick={() => handleDoubleClick(id)}
                         >
-
+                            <Row className='justify-content-center align-items-center g-3'>
+                                <Col xs={12} sm={12} md={6}>
+                                    <h4 className='text-danger'>{patient}</h4>
+                                    <h5>{doctor}</h5>
+                                </Col>
+                                <Col xs={12} sm={12} md={6}>
+                                    <h5>Date: {day.toLocaleDateString()}</h5>
+                                    <h6>Time: {day.toLocaleTimeString()}</h6>
+                                </Col>
+                                <Col xs={2} sm={4} md={1} className="text-end">
+                                    <FaTimesCircle
+                                        className="text-danger fs-1"
+                                        type="button"
+                                        onClick={() => handleDelete(id)}
+                                    />
+                                </Col>
+                            </Row>
                         </div>
                     )
                 })}
